@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NightLovers</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0b0b0b; color: #fff; margin: 0; padding: 0; }
+    header { text-align: center; padding: 40px 20px; font-size: 32px; font-weight: bold; letter-spacing: 2px; }
+    section { padding: 40px 20px; max-width: 900px; margin: auto; }
+    h2 { text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
+    .links a { display: block; margin: 6px 0; color: #fff; text-decoration: none; opacity: 0.8; }
+    .links a:hover { opacity: 1; }
+    .merch-item { margin-bottom: 25px; }
+    .merch-item img { width: 200px; border-radius: 6px; }
+    footer { text-align: center; padding: 30px; opacity: 0.5; }
+  </style>
+</head>
+<body>
+
+<header>NIGHTLOVERS</header>
+
+<section>
+  <h2>MIX OF THE MOMENT</h2>
+  <div id="player"></div>
+</section>
+
+<script>
+  const hour = new Date().getHours();
+  let mixUrl = "";
+
+  // TODO: replace these URLs with real SoundCloud mix links
+  const morningMix = "https://soundcloud.com/nightlovers1";
+  const dayMix = "https://soundcloud.com/nightlovers1";
+  const nightMix = "https://soundcloud.com/nightlovers1";
+
+  if (hour >= 0 && hour < 12) {
+    mixUrl = morningMix;
+  } else if (hour >= 12 && hour < 18) {
+    mixUrl = dayMix;
+  } else {
+    mixUrl = nightMix;
+  }
+
+  document.getElementById("player").innerHTML = `
+  <iframe width="100%" height="166" scrolling="no" frameborder="no"
+    src="https://w.soundcloud.com/player/?url=${mixUrl}">
+  </iframe>`;
+</script>
+
+<section>
+  <h2>MERCH (PRE-ORDER)</h2>
+  <div class="merch-item">
+    <img src="https://via.placeholder.com/200" alt="Merch">
+    <p>NightLovers Hoodie — Black Edition</p>
+    <a href="https://forms.gle/" target="_blank">Pre-order form</a>
+  </div>
+</section>
+
+<section>
+  <h2>BIO</h2>
+  <p>
+    NightLovers — a project focused on deep, atmospheric, emotional sounds.
+    Music for late nights, neon lights, and soft moods.
+  </p>
+</section>
+
+<section>
+  <h2>LINKS</h2>
+  <div class="links">
+    <a href="https://soundcloud.com/nightlovers1" target="_blank">SoundCloud</a>
+    <a href="#" target="_blank">Instagram</a>
+    <a href="#" target="_blank">Telegram</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 NightLovers
+</footer>
+
+</body>
+</html>
