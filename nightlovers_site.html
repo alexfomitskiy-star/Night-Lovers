@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NightLovers Radio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: #111;
+    }
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      opacity: 0.8;
+    }
+    header a:hover {
+      opacity: 1;
+    }
+    #playerBar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #141414;
+      padding: 15px 20px;
+      border-bottom: 1px solid #222;
+    }
+    #playBtn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .hiddenFrame {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="font-size: 22px; font-weight: bold; letter-spacing: 2px;">NIGHTLOVERS</div>
+  <nav>
+    <a href="index.html">Radio</a>
+    <a href="merch.html">Merch</a>
+  </nav>
+</header>
+
+<div id="playerBar">
+  <button id="playBtn">▶️</button>
+  <div id="trackTitle">Loading playlist...</div>
+</div>
+
+<!-- Hidden SoundCloud iframe -->
+<iframe id="scFrame" class="hiddenFrame"></iframe>
+
+<script>
+  const hour = new Date().getHours();
+  let playlistUrl = "";
+  let playlistName = "";
+
+  const night = "https://soundcloud.com/nightlovers1/sets/night-lovers";
+  const morning = "https://soundcloud.com/nightlovers1/sets/morning-of-night-lovers-1";
+  const guest1 = "https://soundcloud.com/nightlovers1/sets/testfm-x-night-lovers-x-shilo";
+  const guest2 = "https://soundcloud.com/nightlovers1/sets/night-lovers-1";
+
+  if (hour >= 0 && hour < 5) {
+    playlistUrl = night;
+    playlistName = "Night Lovers Playlist";
+  } else if (hour >= 5 && hour < 12) {
+    playlistUrl = morning;
+    playlistName = "Morning of Night Lovers";
+  } else {
+    playlistUrl = guest1;
+    playlistName = "Guest Mixes / testFM / Shilo";
+  }
+
+  document.getElementById("trackTitle").innerText = playlistName;
+
+  const frame = document.getElementById("scFrame");
+  frame.src = `https://w.soundcloud.com/player/?url=${playlistUrl}&auto_play=false`;
+
+  let isPlaying = false;
+  const playBtn = document.getElementById("playBtn");
+
+  playBtn.addEventListener("click", () => {
+    frame.contentWindow.postMessage({ method: isPlaying ? "pause" : "play" }, "*");
+    isPlaying = !isPlaying;
+    playBtn.textContent = isPlaying ? "⏸️" : "▶️";
+  });
+</script>
+
+<section>
+  <h2>RADIO</h2>
+  <p>Automatic NightLovers radio based on time of day. Press play above to start.</p>
+</section>
+
+<footer style="text-align:center; padding:20px; opacity:0.5;">© 2025 NightLovers</footer>
+
+</body>
+</html>
